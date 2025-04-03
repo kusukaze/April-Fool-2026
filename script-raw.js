@@ -6,16 +6,16 @@ let role = null;
 // 角色图片配置
 const roleImages = {
     kusukaze: {
-        normal: 'https://notes.sjtu.edu.cn/uploads/upload_6b22f9f37cd9fdd0c5c9bf93cde07731.jpg',
-        critical: 'https://notes.sjtu.edu.cn/uploads/upload_ad6c2f063dbd667f7e9050af7cd1f968.jpg'
+        normal: 'img/kusukaze_happy.jpg',
+        critical: 'img/kusukaze_sad.jpg'
     },
     kokome: {
-        normal: 'https://notes.sjtu.edu.cn/uploads/upload_a72ae557c222182d713d8e09ec9e2db1.jpg',
-        critical: 'https://notes.sjtu.edu.cn/uploads/upload_7950eb70131431e336f3afe6a5c6456a.jpg'
+        normal: 'img/kokome_happy.jpg',
+        critical: 'img/kokome_sad.jpg'
     },
     hikari: {
-        normal: 'https://notes.sjtu.edu.cn/uploads/upload_0d0013917f6a77ec37ddee491bf336b8.jpg',
-        critical: 'https://notes.sjtu.edu.cn/uploads/upload_17b0cc80cd31fa92b8e81f802b6774b6.jpg'
+        normal: 'img/hikari_happy.jpg',
+        critical: 'img/hikari_sad.jpg'
     }
 };
 
