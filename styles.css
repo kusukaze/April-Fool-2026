@@ -34,6 +34,10 @@ body {
     border: 2px solid #3498db;
 }
 
+.health-text {
+    white-space: nowrap; /* 防止文字换行 */
+}
+
 #health-bar {
     width: 200px;
     height: 10px;
@@ -134,4 +138,8 @@ body {
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
+}
+
+#timer.low-time {
+    color: #dc3545;
 }

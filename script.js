@@ -5,23 +5,29 @@ let role = null;
 
 // 角色图片配置
 const roleImages = {
-    warrior: {
-        normal: 'warrior.png',
-        critical: 'warrior_critical.png'
+    kusukaze: {
+        normal: 'img/kusukaze.png',
+        critical: 'img/kusukaze_critical.png'
     },
-    mage: {
-        normal: 'mage.png',
-        critical: 'mage_critical.png'
+    kokome: {
+        normal: 'img/kokome.png',
+        critical: 'img/kokome_critical.png'
     },
-    archer: {
-        normal: 'archer.png',
-        critical: 'archer_critical.png'
+    hikari: {
+        normal: 'img/hikari.png',
+        critical: 'img/hikari_critical.png'
     }
 };
+
+// 常数
+const initScore = 180;
+const passScore = 100;
 
 // 计时器相关变量
 let timerInterval;
 const timeLimit = 30; // 每题限时30秒
+// 音效：时钟滴答声
+const tickSound = new Audio('sound/th_timeout.mp3');
 
 // 获取元素
 const mainPage = document.getElementById('main-page');
@@ -32,6 +38,8 @@ const successPage = document.getElementById('success-page');
 const healthValue = document.getElementById('health-value');
 const healthBar = document.getElementById('health-bar');
 const roleThumbnail = document.getElementById('role-thumbnail');
+const successRoleThumbnail = document.getElementById('success-role-thumbnail');
+const failureRoleThumbnail = document.getElementById('failure-role-thumbnail');
 const questionElement = document.getElementById('question');
 const currentQuestionElement = document.getElementById('current-question');
 const timeLeftElement = document.getElementById('time-left');
@@ -39,6 +47,8 @@ const options = document.querySelectorAll('.option');
 const clickSound = document.getElementById('click-sound');
 const correctSound = document.getElementById('correct-sound');
 const wrongSound = document.getElementById('wrong-sound');
+const winSound = document.getElementById('win-sound');
+const loseSound = document.getElementById('lose-sound');
 
 // 初始化角色缩略图片
 function initRoleThumbnail() {
@@ -48,11 +58,12 @@ function initRoleThumbnail() {
 // 更新血量
 function updateHealth(damage) {
     health -= damage;
+    let healthPercent = (health-passScore) / (initScore-passScore) * 100
     healthValue.textContent = health;
-    healthBar.style.width = `${health}%`;
+    healthBar.style.width = `${0.3*healthPercent}%`;
 
     // 血量低于20时，血条变为红色，角色图片切换为濒死状态
-    if (health <= 20) {
+    if (healthPercent <= 20) {
         healthBar.classList.add('low-health');
         roleThumbnail.src = roleImages[role].critical;
     } else {
@@ -61,8 +72,8 @@ function updateHealth(damage) {
     }
 
     // 血量低于0时，游戏结束
-    if (health <= 0) {
-        showGameOverPage();
+    if (health < passScore) {
+        loseSound.play();
     }
 }
 
@@ -74,6 +85,14 @@ function startTimer() {
     timerInterval = setInterval(() => {
         timeLeft--;
         timeLeftElement.textContent = timeLeft;
+
+        // 剩余时间小于等于5秒时，样式变红并播放时钟音效
+        if (timeLeft <= 5) {
+            document.getElementById('timer').classList.add('low-time');
+            if (timeLeft > 0) {
+                tickSound.play();
+            }
+        }
 
         // 超时处理
         if (timeLeft <= 0) {
@@ -99,7 +118,7 @@ function handleTimeout() {
     wrongSound.play();
 
     // 扣除血量
-    updateHealth(20);
+    updateHealth(35);
 
     // 3秒后进入下一题或结束游戏
     setTimeout(() => {
@@ -122,6 +141,9 @@ function loadQuestion() {
         option.classList.remove('correct', 'wrong', 'disabled');
         option.disabled = false; // 启用所有选项
     });
+
+    // 重置计时器样式
+    document.getElementById('timer').classList.remove('low-time');
 
     // 启动计时器
     startTimer();
@@ -146,7 +168,7 @@ function handleOptionClick(index) {
     } else {
         options[index].classList.add('wrong');
         wrongSound.play();
-        updateHealth(20);
+        updateHealth(50);
     }
 
     // 将其他选项置灰
@@ -159,10 +181,12 @@ function handleOptionClick(index) {
     // 3秒后进入下一题或结束游戏
     setTimeout(() => {
         currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length && health > 0) {
+        if (currentQuestionIndex < questions.length && health > passScore) {
             loadQuestion();
-        } else if (health > 0) {
+        } else if (health >= passScore) {
             showSuccessPage();
+        } else {
+            showGameOverPage(); // 血量低于0时，等待3秒后显示游戏结束页面
         }
     }, 3000);
 }
@@ -189,13 +213,19 @@ function showQuizPage() {
 // 显示游戏结束页面
 function showGameOverPage() {
     hideAllPages();
+    failureRoleThumbnail.src = roleImages[role].critical;
     gameOverPage.classList.remove('hidden');
+    stopTimer();
 }
 
 // 显示挑战成功页面
 function showSuccessPage() {
     hideAllPages();
+    successRoleThumbnail.src = roleImages[role].normal;
     successPage.classList.remove('hidden');
+    document.getElementById('final-score').textContent = health;
+    stopTimer();
+    winSound.play();
 }
 
 // 隐藏所有页面
@@ -210,9 +240,9 @@ function hideAllPages() {
 // 初始化游戏
 function initGame() {
     currentQuestionIndex = 0;
-    health = 100;
+    health = initScore;
     healthValue.textContent = health;
-    healthBar.style.width = '100%';
+    healthBar.style.width = '30%';
     healthBar.classList.remove('low-health');
     initRoleThumbnail();
 }
@@ -254,7 +284,7 @@ document.getElementById('confirm-success').addEventListener('click', () => {
 // 重置游戏
 function resetGame() {
     currentQuestionIndex = 0;
-    health = 100;
+    health = initScore;
     healthValue.textContent = health;
     healthBar.style.width = '100%';
     healthBar.classList.remove('low-health');
