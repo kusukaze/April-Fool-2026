@@ -6,16 +6,16 @@ let role = null;
 // 角色图片配置
 const roleImages = {
     kusukaze: {
-        normal: 'img/kusukaze.png',
-        critical: 'img/kusukaze_critical.png'
+        normal: 'img/kusukaze_happy.jpg',
+        critical: 'img/kusukaze_sad.jpg'
     },
     kokome: {
-        normal: 'img/kokome.png',
-        critical: 'img/kokome_critical.png'
+        normal: 'img/kokome_happy.jpg',
+        critical: 'img/kokome_sad.jpg'
     },
     hikari: {
-        normal: 'img/hikari.png',
-        critical: 'img/hikari_critical.png'
+        normal: 'img/hikari_happy.jpg',
+        critical: 'img/hikari_sad.jpg'
     }
 };
 
@@ -114,7 +114,7 @@ function updateHealth() {
     healthBar.style.width = `${Math.max(0,0.3*healthPercent)}%`;
 
     // 血量低于20时，血条变为红色，角色图片切换为濒死状态
-    if (healthPercent <= 20) {
+    if (healthPercent <= 25) {
         healthBar.classList.add('low-health');
         roleThumbnail.src = roleImages[role].critical;
     } else {
