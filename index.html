@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>答题小游戏</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 主页面 -->
+    <div id="main-page" class="page">
+        <h1>答题小游戏</h1>
+        <button id="start-game">开始游戏</button>
+    </div>
+
+    <!-- 角色选择页面 -->
+    <div id="role-page" class="page hidden">
+        <h1>选择你的角色</h1>
+        <div class="roles">
+            <div class="role" data-role="warrior">
+                <img src="warrior.png" alt="战士">
+                <div class="role-info">
+                    <h3>战士</h3>
+                    <p>技能：高防御，近战攻击</p>
+                </div>
+            </div>
+            <div class="role" data-role="mage">
+                <img src="mage.png" alt="法师">
+                <div class="role-info">
+                    <h3>法师</h3>
+                    <p>技能：高攻击，远程魔法</p>
+                </div>
+            </div>
+            <div class="role" data-role="archer">
+                <img src="archer.png" alt="弓箭手">
+                <div class="role-info">
+                    <h3>弓箭手</h3>
+                    <p>技能：高敏捷，远程射击</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 答题页面 -->
+    <div id="quiz-page" class="page hidden">
+        <div class="health-bar">
+            <!-- 角色缩略图片 -->
+            <img id="role-thumbnail" src="" alt="角色图片" class="role-thumbnail">
+            <!-- 血量显示 -->
+            <span>血量: <span id="health-value">100</span></span>
+            <div id="health-bar"></div>
+        </div>
+        <!-- 题号显示 -->
+        <div id="question-number">第 <span id="current-question">1</span> 题</div>
+        <!-- 计时器显示 -->
+        <div id="timer">剩余时间: <span id="time-left">30</span> 秒</div>
+        <h1 id="question"></h1>
+        <div class="options">
+            <button class="option" data-index="0"></button>
+            <button class="option" data-index="1"></button>
+            <button class="option" data-index="2"></button>
+            <button class="option" data-index="3"></button>
+        </div>
+    </div>
+
+    <!-- 游戏结束页面 -->
+    <div id="game-over-page" class="page hidden">
+        <h1>游戏结束</h1>
+        <button id="confirm-end">确认</button>
+    </div>
+
+    <!-- 挑战成功页面 -->
+    <div id="success-page" class="page hidden">
+        <h1>挑战成功！</h1>
+        <button id="confirm-success">确认</button>
+    </div>
+
+    <!-- 音效 -->
+    <audio id="click-sound" src="click.mp3"></audio>
+    <audio id="correct-sound" src="correct.mp3"></audio>
+    <audio id="wrong-sound" src="wrong.mp3"></audio>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
