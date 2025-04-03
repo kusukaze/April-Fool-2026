@@ -23,10 +23,12 @@ const roleImages = {
 const initScore = 180;
 const passScore = 100;
 const questionNumber = questions.length;
+// 基础扣分，错三分之一卡线及格
+const basicPoint = (initScore - passScore) / questionNumber * 3;
 
 // 计时器相关变量
 let timerInterval;
-const timeLimit = 30; // 每题限时30秒
+const timeLimit = 60; // 每题限时60秒
 // 音效：时钟滴答声
 const tickSound = new Audio('sound/th_timeout.mp3');
 
@@ -56,12 +58,60 @@ function initRoleThumbnail() {
     roleThumbnail.src = roleImages[role].normal;
 }
 
+// 技能
+function useSkill(damage) {
+    if(role == 'kusukaze') { // E = 0.7875
+        if(damage > basicPoint) {
+            damage = Math.floor(0.9 * basicPoint);
+        }
+        damage = Math.min(damage,basicPoint);
+    }
+    else if(role == 'kokome') { // E = 0.8
+        damage = basicPoint;
+        let randomNumber = Math.random();
+        if(randomNumber < 0.1) {
+            damage *= 2;
+        }
+        else if(randomNumber < 0.3) {
+            damage *= 1.5
+        }
+        else if(randomNumber >= 0.8) {
+            damage = 0;
+        }
+        else if(randomNumber >= 0.4) {
+            damage /= 2;
+        }
+    }
+    else if(role == 'hikari') { // E = 0.8
+        if(Math.random() < 0.2) {
+            damage = 0;
+        }
+    }
+    return Math.floor(damage + 0.5);
+}
+
 // 更新血量
-function updateHealth(damage) {
+function updateHealth() {
+    let damage = basicPoint;
+    let randomNumber = Math.random();
+    // E = 1.025
+    if(randomNumber < 0.1) {
+        damage *= 2;
+    }
+    else if(randomNumber < 0.3) {
+        damage *= 1.5
+    }
+    else if(randomNumber >= 0.95) {
+        damage = 0;
+    }
+    else if(randomNumber >= 0.7) {
+        damage /= 2;
+    }
+    damage = useSkill(damage);
     health -= damage;
     let healthPercent = (health-passScore) / (initScore-passScore) * 100
     healthValue.textContent = health;
-    healthBar.style.width = `${0.3*healthPercent}%`;
+    healthBar.style.width = `${Math.max(0,0.3*healthPercent)}%`;
 
     // 血量低于20时，血条变为红色，角色图片切换为濒死状态
     if (healthPercent <= 20) {
@@ -119,14 +169,14 @@ function handleTimeout() {
     wrongSound.play();
 
     // 扣除血量
-    updateHealth(35);
+    updateHealth();
 
     // 3秒后进入下一题或结束游戏
     setTimeout(() => {
         currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length && health > 0) {
+        if (currentQuestionIndex < questions.length && health >= passScore) {
             loadQuestion();
-        } else if (health > 0) {
+        } else if (health >= passScore) {
             showSuccessPage();
         }
     }, 3000);
@@ -169,7 +219,7 @@ function handleOptionClick(index) {
     } else {
         options[index].classList.add('wrong');
         wrongSound.play();
-        updateHealth(50);
+        updateHealth();
     }
 
     // 将其他选项置灰
@@ -182,7 +232,7 @@ function handleOptionClick(index) {
     // 3秒后进入下一题或结束游戏
     setTimeout(() => {
         currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length && health > passScore) {
+        if (currentQuestionIndex < questions.length && health >= passScore) {
             loadQuestion();
         } else if (health >= passScore) {
             showSuccessPage();
