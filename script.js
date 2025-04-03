@@ -22,6 +22,7 @@ const roleImages = {
 // 常数
 const initScore = 180;
 const passScore = 100;
+const questionNumber = questions.length;
 
 // 计时器相关变量
 let timerInterval;
@@ -135,7 +136,7 @@ function handleTimeout() {
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
     questionElement.textContent = question.question;
-    currentQuestionElement.textContent = currentQuestionIndex + 1; // 更新题号
+    currentQuestionElement.textContent = currentQuestionIndex + 1 + ' / ' + questionNumber; // 更新题号
     options.forEach((option, index) => {
         option.textContent = question.options[index];
         option.classList.remove('correct', 'wrong', 'disabled');
