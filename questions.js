@@ -6,6 +6,11 @@ const questions = [
         answer: 0
     },
     {
+        question: "敵は_____にあり",
+        options: ["吉祥寺", "高円寺", "国分寺", "本能寺"],
+        answer: 3
+    },
+    {
         question: "世の中に、_____ _____ __★__ _____、春の心はのどけからまし。",
         options: ["せば", "絶えて", "なかり", "桜の花"],
         answer: 2

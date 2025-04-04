@@ -265,6 +265,7 @@ function showQuizPage() {
 function showGameOverPage() {
     hideAllPages();
     failureRoleThumbnail.src = roleImages[role].critical;
+    document.getElementById('final-progress').textContent = currentQuestionIndex + ' / ' + questionNumber;
     gameOverPage.classList.remove('hidden');
     stopTimer();
 }
