@@ -7,7 +7,7 @@ const questions = [
     },
     {
         question: "敵は_____にあり",
-        options: ["吉祥寺", "高円寺", "国分寺", "本能寺"],
+        options: ["吉祥寺", "西行寺", "花月総持寺", "本能寺"],
         answer: 3
     },
     {
