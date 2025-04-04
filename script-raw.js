@@ -19,6 +19,34 @@ const roleImages = {
     }
 };
 
+// 角色台词
+const finalSentence = {
+    kusukaze: {
+        failure: '对不起，是我拖了后腿……下次我会更努力的。',
+        successLow: '诶？居然通过了……但我还是做得不够好',
+        successMedium: '真的吗？我们做到了？我有点不敢相信……',
+        successHigh: '哇，这个分数……是我能做到的吗？',
+        successVeryHigh: '太、太好了！我竟然也能有这样的表现……',
+        perfect: '天哪，我是不是在做梦？这真的是我参与的结果吗？'
+    },
+    kokome: {
+        failure: '没关系，下次我们一起努力吧！',
+        successLow: '虽然有点难，但我们做到了呢！',
+        successMedium: '已经很棒了，继续加油哦！',
+        successHigh: '真开心，我们的努力有回报了呢！',
+        successVeryHigh: '太厉害了，你总是让我惊喜！',
+        perfect: '完美！和你一起真是太幸福了！'
+    },
+    hikari: {
+        failure: '哇哦，失败了！不过没关系，下次一定赢！',
+        successLow: '耶！勉强过关，但已经超开心啦！',
+        successMedium: '不错不错，继续冲鸭！',
+        successHigh: '太棒啦！我们简直就是最强组合！',
+        successVeryHigh: '哇塞！简直无敌了，超厉害！',
+        perfect: '完美无缺！今天是最棒的一天！'
+    }
+}
+
 // 常数
 const initScore = 180;
 const passScore = 100;
@@ -126,6 +154,27 @@ function updateHealth() {
     if (health < passScore) {
         loseSound.play();
     }
+}
+
+// 获取最终台词
+function getFinalSentence() {
+    if (health < passScore) {
+        return finalSentence[role].failure;
+    }
+    let healthPercent = (health-passScore) / (initScore-passScore) * 100;
+    if (healthPercent < 25) {
+        return finalSentence[role].successLow;
+    }
+    if (healthPercent < 50) {
+        return finalSentence[role].successMedium;
+    }
+    if (healthPercent < 75) {
+        return finalSentence[role].successHigh;
+    }
+    if (healthPercent < 100) {
+        return finalSentence[role].successVeryHigh;
+    }
+    return finalSentence[role].perfect;
 }
 
 // 启动计时器
@@ -266,6 +315,7 @@ function showGameOverPage() {
     hideAllPages();
     failureRoleThumbnail.src = roleImages[role].critical;
     document.getElementById('final-progress').textContent = currentQuestionIndex + ' / ' + questionNumber;
+    document.getElementById('failure-sentence').textContent = getFinalSentence();
     gameOverPage.classList.remove('hidden');
     stopTimer();
 }
@@ -276,6 +326,7 @@ function showSuccessPage() {
     successRoleThumbnail.src = roleImages[role].normal;
     successPage.classList.remove('hidden');
     document.getElementById('final-score').textContent = health;
+    document.getElementById('success-sentence').textContent = getFinalSentence();
     stopTimer();
     winSound.play();
 }

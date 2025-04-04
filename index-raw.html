@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026年4月N1试题！</title>
+    <title>2026年4月JLPT试题！</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="img/umetro_icon.png">
 </head>
@@ -11,7 +11,7 @@
 <!-- 主页面 -->
 <div id="main-page" class="page">
     <h1>2026年4月日本语能力测试</h1>
-    <h1>N1</h1>
+    <h1>N?</h1>
     <p>规则：满分180分，得分100分以上为挑战成功。</p>
     <p></p>
     <button id="start-game">开始游戏</button>
@@ -74,7 +74,8 @@
 <!-- 游戏结束页面 -->
 <div id="game-over-page" class="page hidden">
     <img id="failure-role-thumbnail" src="" alt="角色图片" class="role-thumbnail">
-    <h1>游戏结束</h1>
+    <h1>游戏结束！</h1>
+    <p><span id="failure-sentence"></span></p>
     <p>你答完的题数：<span id="final-progress">0</span></p>
     <button id="confirm-end">确认</button>
 </div>
@@ -83,6 +84,7 @@
 <div id="success-page" class="page hidden">
     <img id="success-role-thumbnail" src="" alt="角色图片" class="role-thumbnail">
     <h1>挑战成功！</h1>
+    <p><span id="success-sentence"></span></p>
     <p>你的得分是：<span id="final-score">0</span></p>
     <button id="confirm-success">确认</button>
 </div>
