@@ -2,7 +2,7 @@
 const questions = [
     // N5，5题
     {
-        question: "あしたは　【雨】ですか。",
+        question: "明日は　【雨】ですか。",
         options: ["ゆき", "はれ", "くもり", "あめ"],
         answer: 3
     },
@@ -28,7 +28,7 @@ const questions = [
     },
     // N4，5题
     {
-        question: "わたしは　この　【味】が　すきです。",
+        question: "私は　この　【味】が　すきです。",
         options: ["かたち", "いろ", "におい", "あじ"],
         answer: 3
     },
@@ -38,7 +38,7 @@ const questions = [
         answer: 0
     },
     {
-        question: "あしたは　サッカーの　【しあい】が　あります。",
+        question: "明日は　サッカーの　【しあい】が　あります。",
         options: ["誡会", "誡合", "試会", "試合"],
         answer: 3
     },
