@@ -96,17 +96,17 @@ function setDifficulty() {
     let color = null;
     let text = null;
     if(difficulty == 1) {
-        questions = allQuestions.slice(0,1);
+        questions = allQuestions.slice(0,20);
         color = "#66ccaa";
         text = "EASY";
     }
     else if(difficulty == 2) {
-        questions = allQuestions.slice(1,2);
+        questions = allQuestions.slice(10,30);
         color = "#66ccff";
         text = "NORMAL";
     }
     else if(difficulty == 3) {
-        questions = allQuestions.slice(2,3);
+        questions = allQuestions.slice(10,40);
         color = "#ff99ff";
         text = "HARD";
     }
