@@ -181,8 +181,8 @@ const allQuestions = [
         answer: 0
     },
     {
-        question: "【今日】",
-        options: ["けふ", "けう", "きやふ", "きやう"],
+        question: "これからの人生に幸_____ことを",
+        options: ["多からん", "多からまほき", "多しなる", "多かりまじき"],
         answer: 0
     },
     {
