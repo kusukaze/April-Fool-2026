@@ -1,7 +1,9 @@
 // 游戏状态
 let currentQuestionIndex = 0;
 let health = 100;
+let difficulty = null;
 let role = null;
+let questions = null;
 
 // 角色图片配置
 const roleImages = {
@@ -50,9 +52,8 @@ const finalSentence = {
 // 常数
 const initScore = 180;
 const passScore = 100;
-const questionNumber = questions.length;
-// 基础扣分，错三分之一卡线及格
-const basicPoint = (initScore - passScore) / questionNumber * 3;
+let questionNumber = null;
+let basicPoint = null;
 
 // 计时器相关变量
 let timerInterval;
@@ -62,6 +63,10 @@ const tickSound = new Audio('sound/th_timeout.mp3');
 
 // 获取元素
 const mainPage = document.getElementById('main-page');
+const difficultyPage = document.getElementById('difficulty-page');
+const difficultyText = document.getElementById('difficulty-text');
+const difficultyTextSuccess = document.getElementById('difficulty-text-success');
+const difficultyTextFailure = document.getElementById('difficulty-text-failure');
 const rolePage = document.getElementById('role-page');
 const quizPage = document.getElementById('quiz-page');
 const gameOverPage = document.getElementById('game-over-page');
@@ -84,6 +89,36 @@ const loseSound = document.getElementById('lose-sound');
 // 初始化角色缩略图片
 function initRoleThumbnail() {
     roleThumbnail.src = roleImages[role].normal;
+}
+
+// 设定难度
+function setDifficulty() {
+    let color = null;
+    let text = null;
+    if(difficulty == 1) {
+        questions = allQuestions.slice(0,20);
+        color = "#66ccaa";
+        text = "EASY";
+    }
+    else if(difficulty == 2) {
+        questions = allQuestions.slice(10,30);
+        color = "#66ccff";
+        text = "NORMAL";
+    }
+    else if(difficulty == 3) {
+        questions = allQuestions.slice(10,40);
+        color = "#ff99ff";
+        text = "HARD";
+    }
+    difficultyText.style.color = color;
+    difficultyText.textContent = text;
+    difficultyTextSuccess.style.color = color;
+    difficultyTextSuccess.textContent = text;
+    difficultyTextFailure.style.color = color;
+    difficultyTextFailure.textContent = text;
+    questionNumber = questions.length;
+    // 基础扣分，错三分之一卡线及格
+    basicPoint = (initScore - passScore) / questionNumber * 3;
 }
 
 // 技能
@@ -297,8 +332,15 @@ function showMainPage() {
     mainPage.classList.remove('hidden');
 }
 
+// 显示难度选择页面
+function showDifficultyPage() {
+    hideAllPages();
+    difficultyPage.classList.remove('hidden');
+}
+
 // 显示角色选择页面
 function showRolePage() {
+    setDifficulty();
     hideAllPages();
     rolePage.classList.remove('hidden');
 }
@@ -334,6 +376,7 @@ function showSuccessPage() {
 // 隐藏所有页面
 function hideAllPages() {
     mainPage.classList.add('hidden');
+    difficultyPage.classList.add('hidden');
     rolePage.classList.add('hidden');
     quizPage.classList.add('hidden');
     gameOverPage.classList.add('hidden');
@@ -352,6 +395,24 @@ function initGame() {
 
 // 事件监听
 document.getElementById('start-game').addEventListener('click', () => {
+    clickSound.play();
+    showDifficultyPage();
+});
+
+document.getElementById('difficulty-easy').addEventListener('click', () => {
+    difficulty = 1;
+    clickSound.play();
+    showRolePage();
+});
+
+document.getElementById('difficulty-normal').addEventListener('click', () => {
+    difficulty = 2;
+    clickSound.play();
+    showRolePage();
+});
+
+document.getElementById('difficulty-hard').addEventListener('click', () => {
+    difficulty = 3;
     clickSound.play();
     showRolePage();
 });
