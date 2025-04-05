@@ -1,8 +1,61 @@
 // 题库
-const questions = [
+const allQuestions = [
+    // 五十音，6题
+    {
+        question: "の",
+        options: ["no", "ka", "wa", "i"],
+        answer: 0
+    },
+    {
+        question: "ン",
+        options: ["so", "ri", "ha", "n"],
+        answer: 3
+    },
+    {
+        question: "wakuwaku",
+        options: ["きらきら", "どきどき", "わくわく", "ばらばら"],
+        answer: 2
+    },
+    {
+        question: "homura",
+        options: ["まどか", "ほむら", "さやか", "きょうこ"],
+        answer: 1
+    },
+    {
+        question: "tomori",
+        options: ["ともり", "あのん", "らーな", "りっき"],
+        answer: 0
+    },
+    {
+        question: "bocchi",
+        options: ["ぼっち", "ほっち", "はっち", "ばっち"],
+        answer: 0
+    },
+    // 寒暄语，3题
+    {
+        question: "早上好",
+        options: ["こんばんは", "こんにちは", "おはよう", "おやすみなさい"],
+        answer: 2
+    },
+    {
+        question: "谢谢",
+        options: ["すみません", "ごめんなさい", "ありがとう", "いただきます"],
+        answer: 2
+    },
+    {
+        question: "再见",
+        options: ["いってらっしゃい", "おかえりなさい", "お邪魔します", "じゃね"],
+        answer: 3
+    },
+    // 动词变形，1题
+    {
+        question: "_____ください",
+        options: ["食べます", "食べて", "食べる", "食べた"],
+        answer: 1
+    },
     // N5，5题
     {
-        question: "明日は　【雨】ですか。",
+        question: "涙の　【雨】が　頬を　たたく　たびに　美しく",
         options: ["ゆき", "はれ", "くもり", "あめ"],
         answer: 3
     },
@@ -28,8 +81,8 @@ const questions = [
     },
     // N4，5题
     {
-        question: "私は　この　【味】が　すきです。",
-        options: ["かたち", "いろ", "におい", "あじ"],
+        question: "【色】は匂へど　散りぬるを",
+        options: ["かたち", "あじ", "におい", "いろ"],
         answer: 3
     },
     {
@@ -108,7 +161,7 @@ const questions = [
     },
     {
         question: "香澄は有咲をバンドに誘う。しかし、学年一の秀才でありながら、学校もサボりがちなインドア派の有咲の態度は_____。",
-        options: ["あどけない", "そっけない", "おっかない", "半端ない"],
+        options: ["あどけない", "そっけない", "おっかない", "たわいない"],
         answer: 1
     },
     {

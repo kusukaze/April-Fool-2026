@@ -17,6 +17,28 @@
     <button id="start-game">开始游戏</button>
 </div>
 
+<!-- 难度选择页面 -->
+<div id="difficulty-page" class="page hidden">
+    <!-- 简单难度 -->
+    <div class="difficulty easy">
+        <button id="difficulty-easy">EASY</button>
+        <div class="description">推荐等级：N5~N4</div>
+    </div>
+
+    <!-- 中等难度 -->
+    <div class="difficulty medium">
+        <button id="difficulty-normal">NORMAL</button>
+        <div class="description">推荐等级：N3~N2</div>
+    </div>
+
+    <!-- 困难难度 -->
+    <div class="difficulty hard">
+        <button id="difficulty-hard">HARD</button>
+        <div class="description">推荐等级：N1</div>
+    </div>
+
+</div>
+
 <!-- 角色选择页面 -->
 <div id="role-page" class="page hidden">
     <h1>选择你的角色</h1>
@@ -50,6 +72,7 @@
 
 <!-- 答题页面 -->
 <div id="quiz-page" class="page hidden">
+    <h2 id="difficulty-text"></h2>
     <div class="health-bar">
         <!-- 角色缩略图片 -->
         <img id="role-thumbnail" src="" alt="角色图片" class="role-thumbnail">
@@ -73,6 +96,7 @@
 
 <!-- 游戏结束页面 -->
 <div id="game-over-page" class="page hidden">
+    <h2 id="difficulty-text-failure"></h2>
     <img id="failure-role-thumbnail" src="" alt="角色图片" class="role-thumbnail">
     <h1>游戏结束！</h1>
     <p><span id="failure-sentence"></span></p>
@@ -82,6 +106,7 @@
 
 <!-- 挑战成功页面 -->
 <div id="success-page" class="page hidden">
+    <h2 id="difficulty-text-success"></h2>
     <img id="success-role-thumbnail" src="" alt="角色图片" class="role-thumbnail">
     <h1>挑战成功！</h1>
     <p><span id="success-sentence"></span></p>

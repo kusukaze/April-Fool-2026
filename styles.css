@@ -148,3 +148,47 @@ body {
 #timer.low-time {
     color: #dc3545;
 }
+
+.difficulty {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.difficulty button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.difficulty button:hover {
+    opacity: 0.8;
+}
+.easy button {
+    background-color: #66ccaa;
+    color: black;
+}
+.medium button {
+    background-color: #66ccff;
+    color: black;
+}
+.hard button {
+    background-color: #ff99ff;
+    color: black;
+}
+.description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.head-display {
+    height: 10vh;
+    transition: opacity 0.5s ease-in-out;
+}
